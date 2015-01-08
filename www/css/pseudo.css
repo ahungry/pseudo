@@ -1,0 +1,422 @@
+/**
+ * Pseudo - A pseudo 3d multiplayer roguelike
+ * Copyright (C) 2013 Matthew Carter
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+body {
+  background: #444444;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #000000 0%, #444444 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(100%, #444444));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #000000 0%, #444444 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #000000 0%, #444444 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(top, #000000 0%, #444444 100%);
+  /* IE10+ */
+
+  background: linear-gradient(to bottom, #000000 0%, #444444 100%);
+  /* W3C */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#000000, endColorstr=#444444, GradientType=0);
+  /* IE6-8 */
+
+  font-family: monospace;
+  margin: 0;
+}
+#fog {
+  box-shadow: -3px 3px 6px #000000;
+  float: left;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+  width: 100px;
+}
+canvas#minimap {
+  position: absolute;
+}
+canvas#minimapobjects {
+  position: absolute;
+}
+div#overlay {
+  position: absolute;
+  width: 310px;
+  height: 190px;
+  padding: 5px;
+  color: white;
+  font-family: lucida console, courier new;
+  font-size: 10px;
+  z-index: 100000001;
+}
+div#floor {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -10000000;
+  background: lime;
+}
+.lighting {
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#shade1 {
+  background: lime;
+  z-index: -200000;
+}
+#shade2 {
+  background: #000;
+  opacity: .3;
+  z-index: -60000;
+}
+#shade3 {
+  background: #000;
+  opacity: .2;
+  z-index: -30000;
+}
+#shade4 {
+  background: #000;
+  opacity: .1;
+  z-index: -10000;
+}
+div#floor-shade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: -20000;
+  background: rgba(0, 0, 0, 0.5);
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, #000000 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #000000), color-stop(100%, rgba(0, 0, 0, 0.5)));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, #000000 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, #000000 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(top, #000000 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* IE10+ */
+
+  background: linear-gradient(to bottom, #000000 0%, rgba(0, 0, 0, 0.5) 100%);
+  /* W3C */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#000000, endColorstr=rgba(0, 0, 0, 0.5), GradientType=0);
+  /* IE6-8 */
+
+}
+div#ceiling {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: blue;
+  z-index: -10000000;
+}
+div#ceiling-shade {
+  position: absolute;
+  width: 100%;
+  height: 50%;
+  background: transparent;
+  /* Old browsers */
+
+  background: -moz-linear-gradient(top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  /* FF3.6+ */
+
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(0, 0, 0, 0.7)), color-stop(100%, transparent));
+  /* Chrome,Safari4+ */
+
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  /* Chrome10+,Safari5.1+ */
+
+  background: -o-linear-gradient(top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  /* Opera 11.10+ */
+
+  background: -ms-linear-gradient(top, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  /* IE10+ */
+
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
+  /* W3C */
+
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=rgba(0, 0, 0, 0.7), endColorstr=transparent, GradientType=0);
+  /* IE6-8 */
+
+  z-index: -20000;
+}
+#screen {
+  position: relative;
+  width: 90%;
+  height: 90%;
+  border: 1px solid black;
+  overflow: hidden;
+  margin: auto;
+  float: left;
+}
+#right-pane {
+  opacity: .5;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  width: 200px;
+}
+#info {
+  background: #fff;
+  box-shadow: -3px 3px 6px #000000;
+  color: #000;
+  float: right;
+  padding: 4px;
+  text-align: right;
+  width: 86px;
+}
+#portrait {
+  height: 90px;
+  width: 90px;
+  overflow: hidden;
+  position: relative;
+}
+#portrait img {
+  margin-top: 0px;
+  margin-left: 0px;
+  width: 400px;
+}
+#chat {
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  bottom: 20px;
+  box-shadow: 3px 3px 6px #000;
+  right: 0px;
+  margin: auto 1%;
+  height: 23%;
+  overflow-y: scroll;
+  padding: 3px;
+  position: fixed;
+  width: 30%;
+  white-space: pre-wrap;
+  /* css-3 */
+
+  white-space: -moz-pre-wrap;
+  /* Mozilla, since 1999 */
+
+  white-space: -pre-wrap;
+  /* Opera 4-6 */
+
+  white-space: -o-pre-wrap;
+  /* Opera 7 */
+
+  word-wrap: break-word;
+}
+#chat-prompt {
+  -webkit-border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 3px 3px 6px #000000;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  display: none;
+  left: 0;
+  margin-left: 40%;
+  margin-top: 40%;
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  width: 20%;
+  z-index: 9;
+}
+#stats div {
+  text-align: right;
+}
+#stats div span {
+  font-size: 2em;
+  font-weight: bold;
+  margin-right: 13px;
+}
+#dialog {
+  -webkit-border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  box-shadow: 3px 3px 6px #000000;
+  background: rgba(0, 0, 0, 0.9);
+  font-family: monospace;
+  position: fixed;
+  top: 30%;
+  left: 0%;
+  max-width: 40%;
+  font-size: 12px;
+  padding: 4px;
+  color: #fff;
+  display: none;
+  z-index: 9999998;
+  opacity: .8;
+}
+#dialog a {
+  background: #000;
+  border: 2px solid #333;
+  color: #fff;
+  text-decoration: none;
+  padding: 9px;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+}
+#dialog .yes {
+  display: block;
+  font-size: 1.2em;
+  margin: 3px;
+  z-index: 98;
+}
+#dialog .yes:hover {
+  border: 2px solid red;
+}
+#dialog .no {
+  font-size: .9em;
+  display: block;
+  opacity: .8;
+  z-index: 98;
+}
+#dialog .no:hover {
+  border: 2px solid red;
+}
+#loading {
+  background: #000;
+  color: #fff;
+  font-family: monospace;
+  font-size: 20px;
+  height: 100%;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 9999999;
+}
+#loading .holder {
+  display: inline-block;
+  height: 64px;
+  overflow: hidden;
+  width: 64px;
+}
+#loading img {
+  height: 64px;
+}
+#combat {
+  background: rgba(255, 0, 0, 0.5);
+  box-shadow: 3px 3px 6px #000;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  text-shadow: 3px 3px 6px #000;
+  position: fixed;
+  top: 50%;
+  left: 0;
+  padding: 10px;
+  z-index: 8;
+}
+#items {
+  box-shadow: 3px 3px 6px #000000;
+  -webkit-border-radius: 3px 3px 3px 3px;
+  -moz-border-radius: 3px 3px 3px 3px;
+  border-radius: 3px 3px 3px 3px;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  position: fixed;
+  top: 100px;
+  font-size: 20px;
+  right: 100px;
+  padding: 20px;
+  height: 50px;
+  width: 50px;
+  z-index: 999999;
+}
+#items #item-helper {
+  font-size: 10px;
+  display: none;
+}
+#items #item-list {
+  display: none;
+  font-size: 12px;
+  height: 250px;
+  overflow-y: scroll;
+}
+#items #item-list .item {
+  background: rgba(0, 0, 0, 0.7);
+  border: 2px solid #000;
+  color: #fff;
+  font-size: 2em;
+  height: 50px;
+  overflow: hidden;
+  padding: 10px;
+}
+#items #item-list .item .item-stats {
+  text-align: right;
+}
+#items #item-list .item b {
+  font-size: .5em;
+  font-weight: normal;
+  margin-left: 9px;
+}
+#items #item-list .item:hover {
+  border: 2px solid red;
+}
+#items #item-list .item img {
+  float: left;
+  margin-top: -200px;
+}
+#loading,
+#portrait img,
+#sword,
+.enemy {
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+#attack-animation {
+  bottom: 0;
+  height: 640px;
+  overflow: hidden;
+  right: 20%;
+  position: fixed;
+  width: 640px;
+}
+#sword {
+  height: 640px;
+  margin-left: 0px;
+  opacity: .3;
+}
+#battle {
+  background: rgba(0, 0, 0, 0.9);
+  height: 100%;
+  left: 0px;
+  position: fixed;
+  top: 0px;
+  width: 90%;
+  z-index: 999;
+}
+#battle #battle-canvas {
+  background: #fff;
+  height: 80%;
+  margin: 5%;
+  width: 80%;
+}

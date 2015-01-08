@@ -1,0 +1,96 @@
+html, body {
+    background:#333;
+    color:#fff;
+    font-family:sans-serif;
+}
+
+#content {
+    background:#fff;
+    box-shadow:3px 3px 6px #000;
+    color:#666;
+    font-size:1.2em;
+    margin:2%;
+    padding:2%;
+    padding-left:5%;
+    padding-right:5%;
+    text-align:justify;
+}
+
+#loading {
+    background:#333;
+    border:2px solid lime;
+    border-radius:9px;
+    box-shadow:inset 4px 4px 6px #000;
+    color:#fff;
+    font-family:monospace;
+    text-align:center;
+    top:0;
+    width:100%;
+    z-index:9999999;
+    .holder {
+        display:inline-block;
+        height:64px;
+        overflow:hidden;
+        width:64px;
+    }
+    img {
+        height:64px;
+        margin:auto;
+    }
+}
+
+#loading, #portrait img, #sword, .enemy {
+    image-rendering: -moz-crisp-edges;
+    image-rendering: -o-crisp-edges;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+#play-game {
+    background:#333;
+    border:2px solid lime;
+    border-radius:20px;
+    color:#fff;
+    display:block;
+    font-family:monospace;
+    margin:auto;
+    margin-top:4px;
+    padding:9px;
+    text-align:center;
+    text-decoration:none;
+    transition:3s ease all;
+    width:30%;
+    &:hover {
+        border:10px solid orange;
+        box-shadow:inset 4px 4px 6px #000;
+        font-weight:bold;
+        padding:20px;
+        width:90%;
+    }
+}
+
+.screenie {
+    border:22px dotted #bbb;
+    border-radius:50px;
+    display:block;
+    margin:auto;
+    margin-bottom:10px;
+    margin-top:10px;
+    transition:1s ease all;
+    width:30%;
+    &:hover {
+        border:2px solid #000;
+        border-radius:3px;
+        width:90%;
+    }
+}
+
+a {
+    color:navy;
+    font-family:Serif;
+    font-weight:bold;
+    text-decoration:none;
+    &:hover {
+        text-decoration:underline;
+    }
+}
