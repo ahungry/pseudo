@@ -24,6 +24,7 @@
   :depends-on (#:alexandria
                #:bordeaux-threads
                #:usocket
+               #:usocket-server
                #:jsown
                #:clsql
                #:cl-ppcre
