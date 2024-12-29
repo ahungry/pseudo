@@ -18,3 +18,9 @@ first, as it is used extensively throughout this project.
 
 ## Live demo
 Play the live demo at http://ahungry.com:4242/pseudo.html !
+
+# If you get an error about lacking lfp.h:
+
+```sh
+sudo pacman -S libfixposix
+```
